@@ -1,0 +1,16 @@
+server:
+  port: 18001   # 和你模块名对应
+
+spring:
+  application:
+    name: eureka-server
+
+eureka:
+  instance:
+    hostname: eurekaServer18001
+  client:
+    # 下面两个 false 很关键：自己是注册中心，不用注册自己
+#    register-with-eureka: false
+#    fetch-registry: false
+    service-url:
+      defaultZone: http://eurekaServer18003:18003/eureka/,http://eurekaServer18002:18002/eureka/

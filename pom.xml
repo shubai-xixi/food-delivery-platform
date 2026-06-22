@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0
+         https://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <!-- 父工程的爹：Spring Boot 官方 Parent -->
+    <parent>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-starter-parent</artifactId>
+        <version>4.0.6</version>
+        <relativePath/>
+    </parent>
+
+    <!-- 自己的坐标 -->
+    <groupId>org.example</groupId>
+    <artifactId>elm-parent</artifactId>
+    <version>0.0.1-SNAPSHOT</version>
+
+    <!-- 关键：必须是 pom -->
+    <packaging>pom</packaging>
+
+    <properties>
+        <java.version>21</java.version>
+        <!-- 锁定 Spring Cloud 版本 -->
+        <spring-cloud.version>2025.1.1</spring-cloud.version>
+    </properties>
+
+    <!-- 只做版本管理，不引入实际依赖 -->
+    <dependencyManagement>
+        <dependencies>
+            <dependency>
+                <groupId>org.springframework.cloud</groupId>
+                <artifactId>spring-cloud-dependencies</artifactId>
+                <version>${spring-cloud.version}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+
+            <!-- Source: https://mvnrepository.com/artifact/com.baomidou/mybatis-plus-spring-boot4-starter -->
+            <dependency>
+                <groupId>com.baomidou</groupId>
+                <artifactId>mybatis-plus-spring-boot4-starter</artifactId>
+                <version>3.5.16</version>
+                <scope>compile</scope>
+            </dependency>
+
+            <!-- Source: https://mvnrepository.com/artifact/org.projectlombok/lombok -->
+            <dependency>
+                <groupId>org.projectlombok</groupId>
+                <artifactId>lombok</artifactId>
+                <version>1.18.46</version>
+                <scope>compile</scope>
+            </dependency>
+
+            <!-- Source: https://mvnrepository.com/artifact/org.springdoc/springdoc-openapi-starter-webmvc-ui -->
+            <dependency>
+                <groupId>org.springdoc</groupId>
+                <artifactId>springdoc-openapi-starter-webmvc-ui</artifactId>
+                <version>3.0.3</version>
+                <scope>compile</scope>
+            </dependency>
+
+        </dependencies>
+    </dependencyManagement>
+
+    <!-- 聚合子模块，一键构建 -->
+    <modules>
+        <module>Server18001</module>
+        <module>Server18002</module>
+        <module>Server18003</module>
+        <module>user_service</module>
+        <module>good_service</module>
+        <module>order_service</module>
+        <module>payment_service</module>
+        <module>lab2-service</module>
+    </modules>
+</project>

@@ -1,0 +1,11 @@
+server:
+  port: 18100
+
+spring:
+  application:
+    name: lab2-service
+
+eureka:
+  client:
+    service-url:
+      defaultZone: http://eurekaServer18001:18001/eureka/,http://eurekaServer18002:18002/eureka/,http://eurekaServer18003:18003/eureka/

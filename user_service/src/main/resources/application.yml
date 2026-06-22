@@ -1,0 +1,21 @@
+server:
+  port: 18081
+
+spring:
+  application:
+    name: user-service
+  datasource:
+    url: jdbc:mysql://localhost:3306/elm_user?useUnicode=true&characterEncoding=utf-8&serverTimezone=Asia/Shanghai
+    username: root
+    password: Mysqlsjk
+    driver-class-name: com.mysql.cj.jdbc.Driver
+
+mybatis-plus:
+  configuration:
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+
+
+eureka:
+  client:
+    service-url:
+      defaultZone: http://eurekaServer18001:18001/eureka/,http://eurekaServer18002:18002/eureka/,http://eurekaServer18003:18003/eureka/

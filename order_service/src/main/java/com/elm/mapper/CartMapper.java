@@ -1,0 +1,12 @@
+// ========== order-service Mapper ==========
+
+// CartMapper.java
+package com.elm.mapper;
+
+import com.baomidou.mybatisplus.core.mapper.BaseMapper;
+import com.elm.entity.Cart;
+import org.apache.ibatis.annotations.Mapper;
+
+@Mapper
+public interface CartMapper extends BaseMapper<Cart> {
+}
