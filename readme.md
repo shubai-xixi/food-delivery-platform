@@ -6,7 +6,7 @@
 Spring Boot + Spring Cloud + MySQL + Redis + Swagger
 
 ## 接口文档
-启动项目后访问：`http://localhost:8080/doc.html`
+启动项目后访问：`http://localhost:9999/doc.html`
 
 ## 快速启动
 初始化数据库后，启动各服务即可
