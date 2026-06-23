@@ -58,7 +58,36 @@
             <artifactId>spring-cloud-starter-loadbalancer</artifactId>
         </dependency>
 
+        <!-- Resilience4j 断路器、隔离、限流 -->
+        <!-- Source: https://mvnrepository.com/artifact/org.springframework.cloud/spring-cloud-starter-circuitbreaker-resilience4j -->
+        <dependency>
+            <groupId>org.springframework.cloud</groupId>
+            <artifactId>spring-cloud-starter-circuitbreaker-resilience4j</artifactId>
+<!--            <version>5.0.2</version>-->
+            <scope>compile</scope>
+        </dependency>
 
+        <!-- 如果你用 Spring Boot 4.x，还需要 Actuator 用于健康检查（可选） -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-actuator</artifactId>
+        </dependency>
+
+        <!-- Source: https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-starter-aop -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-aop</artifactId>
+            <!--                <version>4.0.0-M2</version>-->
+<!--            <scope>compile</scope>-->
+        </dependency>
+
+        <!-- Source: https://mvnrepository.com/artifact/io.github.resilience4j/resilience4j-bulkhead -->
+        <dependency>
+            <groupId>io.github.resilience4j</groupId>
+            <artifactId>resilience4j-bulkhead</artifactId>
+            <version>2.4.0</version>
+            <scope>compile</scope>
+        </dependency>
 
         <!-- Source: https://mvnrepository.com/artifact/org.springdoc/springdoc-openapi-starter-webmvc-ui -->
         <dependency>

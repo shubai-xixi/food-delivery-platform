@@ -19,3 +19,68 @@ eureka:
   client:
     service-url:
       defaultZone: http://eurekaServer18001:18001/eureka/,http://eurekaServer18002:18002/eureka/,http://eurekaServer18003:18003/eureka/
+
+
+resilience4j:
+  circuitbreaker:
+    configs:
+      default:
+        sliding-window-type: TIME_BASED
+        sliding-window-size: 10
+        minimum-number-of-calls: 5
+        wait-duration-in-open-state: 5s
+        permitted-number-of-calls-in-half-open-state: 3
+    instances:
+      # 断路器 A：失败率 30%，仅异常熔断
+      circuitBreakerA:
+        failure-rate-threshold: 30
+        slow-call-rate-threshold: 100        # 不触发慢调用
+        slow-call-duration-threshold: 60s
+        sliding-window-type: TIME_BASED
+        sliding-window-size: 10
+        minimum-number-of-calls: 5
+        wait-duration-in-open-state: 5s
+        permitted-number-of-calls-in-half-open-state: 3
+
+      # 断路器 B：失败率 50% + 慢调用 30%（>2秒）
+      circuitBreakerB:
+        failure-rate-threshold: 50
+        slow-call-rate-threshold: 30
+        slow-call-duration-threshold: 2s
+        sliding-window-type: TIME_BASED
+        sliding-window-size: 10
+        minimum-number-of-calls: 5
+        wait-duration-in-open-state: 5s
+        permitted-number-of-calls-in-half-open-state: 3
+
+  # 线程隔离器
+#  thread-pool-bulkhead:
+#    instances:
+#      bulkheadService:
+#        max-thread-pool-size: 10
+#        core-thread-pool-size: 2
+#        queue-capacity: 0
+#        keep-alive-duration: 20ms
+
+  bulkhead:
+    configs:
+      default:
+        max-concurrent-calls: 10
+        max-wait-duration: 20ms
+    instances:
+      bulkheadService:
+        max-concurrent-calls: 10
+        max-wait-duration: 20ms
+
+  # 限流器
+  ratelimiter:
+    instances:
+      rateLimiterService:
+        limit-for-period: 5
+        limit-refresh-period: 2s
+        timeout-duration: 0ms
+
+
+logging:
+  level:
+    io.github.resilience4j: DEBUG
