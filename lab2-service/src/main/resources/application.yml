@@ -5,6 +5,16 @@ spring:
   application:
     name: lab2-service
 
+  cloud:
+    loadbalancer:
+      strategy: weight          # ← 负载均衡策略：轮询不写，随机写 random
+    openfeign:
+      client:
+        config:
+          user-service:
+            connect-timeout: 5000
+            read-timeout: 5000
+
 eureka:
   client:
     service-url:

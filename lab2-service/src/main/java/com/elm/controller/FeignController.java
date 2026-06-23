@@ -5,6 +5,7 @@ import com.elm.dto.AddressDTO;
 import com.elm.dto.RegisterDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cloud.openfeign.FeignClient;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import java.util.Map;
 
@@ -14,8 +15,10 @@ public class FeignController {
 
     @FeignClient(name = "user-service")
     public interface UserServiceFeign {
+        //        @GetMapping("/user/info/{userId}")
+        //        Result<Map<String, Object>> getUser(@PathVariable("userId") Long userId);
         @GetMapping("/user/info/{userId}")
-        Result<Map<String, Object>> getUser(@PathVariable("userId") Long userId);
+        ResponseEntity<Result<Map<String, Object>>> getUser(@PathVariable("userId") Long userId);
 
         @PostMapping("/user/register")
         Result<String> register(@RequestBody RegisterDTO dto);
@@ -32,8 +35,15 @@ public class FeignController {
 
     @GetMapping("/user/{userId}")
     public Result<?> getUser(@PathVariable Long userId) {
-        System.out.println("[Feign] GET userId=" + userId);
-        return feign.getUser(userId);
+        // 收到 ResponseEntity，可以取响应头
+        ResponseEntity<Result<Map<String, Object>>> response = feign.getUser(userId);
+
+        // 从响应头拿端口
+        String port = response.getHeaders().getFirst("X-Server-Port");
+        System.out.println("[Feign] 端口: " + port + " | userId: " + userId);
+
+        // 返回原始数据
+        return response.getBody();
     }
 
     @PostMapping("/user")

@@ -71,6 +71,7 @@
         <module>Server18002</module>
         <module>Server18003</module>
         <module>user_service</module>
+        <module>user_service1</module>
         <module>good_service</module>
         <module>order_service</module>
         <module>payment_service</module>
