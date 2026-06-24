@@ -3,14 +3,12 @@ package com.elm.controller;
 import com.elm.common.Result;
 import com.elm.dto.AddressDTO;
 import com.elm.dto.RegisterDTO;
-import com.elm.fallback.UserServiceFallbackFactory;
 import com.elm.feign.UserServiceFeign;
 import io.github.resilience4j.bulkhead.annotation.Bulkhead;
 import io.github.resilience4j.circuitbreaker.annotation.CircuitBreaker;
 import io.github.resilience4j.ratelimiter.annotation.RateLimiter;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import java.util.Map;
@@ -38,18 +36,6 @@ public class FeignController {
 //        Result<?> deleteAddress(@PathVariable("id") Long id);
 //    }
 
-    @org.springframework.beans.factory.annotation.Value("${resilience4j.bulkhead.instances.bulkheadService.max-concurrent-calls:NOT_FOUND}")
-    private String maxCalls;
-
-    @org.springframework.beans.factory.annotation.Value("${resilience4j.bulkhead.instances.bulkheadService.max-wait-duration:NOT_FOUND}")
-    private String maxWait;
-
-    @jakarta.annotation.PostConstruct
-    public void init() {
-        log.error("========== max-concurrent-calls = {} ==========", maxCalls);
-        log.error("========== max-wait-duration = {} ==========", maxWait);
-    }
-
     @Autowired
     private UserServiceFeign feign;
 
@@ -58,11 +44,9 @@ public class FeignController {
     public Result<?> getUser(@PathVariable Long userId) {
         // 收到 ResponseEntity，可以取响应头
         ResponseEntity<Result<Map<String, Object>>> response = feign.getUser(userId);
-
         // 从响应头拿端口
         String port = response.getHeaders().getFirst("X-Server-Port");
         System.out.println("[Feign] 端口: " + port + " | userId: " + userId);
-
         // 返回原始数据
         return response.getBody();
     }

@@ -1,0 +1,124 @@
+server:
+  port: 18999
+
+spring:
+  data:
+    redis:
+      host: localhost
+      port: 6379
+  application:
+    name: gateway-service
+  cloud:
+    gateway:
+      server:
+        webflux:
+          discovery:
+            locator:
+              enabled: false
+          routes:
+            # 查询用户信息
+            - id: user-info-route
+              uri: lb://user-service
+              predicates:
+                - Path=/api/user/info/**
+              filters:
+                - StripPrefix=1
+                - name: CircuitBreaker
+                  args:
+                    name: userServiceBreaker
+                    fallbackUri: forward:/fallback/user
+
+            # 慢接口 - 熔断测试用
+            - id: user-slow-route
+              uri: lb://user-service
+              predicates:
+                - Path=/api/user/slow/**
+              filters:
+                - StripPrefix=1
+
+            # 用户注册
+            - id: user-register-route
+              uri: lb://user-service
+              predicates:
+                - Path=/api/user/register
+              filters:
+                - StripPrefix=1
+
+            # 用户登录
+            - id: user-login-route
+              uri: lb://user-service
+              predicates:
+                - Path=/api/user/login
+              filters:
+                - StripPrefix=1
+
+            # 新增地址
+            - id: address-add-route
+              uri: lb://user-service
+              predicates:
+                - Path=/api/address
+                - Method=POST
+              filters:
+                - StripPrefix=1
+
+            # 更新地址
+            - id: address-update-route
+              uri: lb://user-service
+              predicates:
+                - Path=/api/address/**
+                - Method=PUT
+              filters:
+                - StripPrefix=1
+
+            # 删除地址
+            - id: address-delete-route
+              uri: lb://user-service
+              predicates:
+                - Path=/api/address/**
+                - Method=DELETE
+              filters:
+                - StripPrefix=1
+                - name: RequestRateLimiter
+                  args:
+                    redis-rate-limiter.replenishRate: 1      # 每秒生成 1 个令牌
+                    redis-rate-limiter.burstCapacity: 2       # 最多突发 2 个请求
+                    key-resolver: "#{@ipKeyResolver}"         # 按 IP 限流
+
+            # 地址列表
+            - id: address-list-route
+              uri: lb://user-service
+              predicates:
+                - Path=/api/address/list
+              filters:
+                - StripPrefix=1
+
+          globalcors:
+            cors-configurations:
+              '[/**]':
+                allowedOrigins: "http://localhost:3000"
+                allowedMethods: "*"
+                allowedHeaders: "*"
+                allowCredentials: true
+
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://eurekaServer18001:18001/eureka/,http://eurekaServer18002:18002/eureka/,http://eurekaServer18003:18003/eureka/
+
+resilience4j:
+  circuitbreaker:
+    configs:
+      default:
+        slidingWindowSize: 10
+        minimumNumberOfCalls: 3
+        failureRateThreshold: 50
+        waitDurationInOpenState: 10s
+        permittedNumberOfCallsInHalfOpenState: 2
+        automaticTransitionFromOpenToHalfOpenEnabled: true
+    instances:
+      userServiceBreaker:
+        baseConfig: default
+  timelimiter:
+    configs:
+      default:
+        timeoutDuration: 5s

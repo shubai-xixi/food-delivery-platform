@@ -85,5 +85,6 @@
         <module>order_service</module>
         <module>payment_service</module>
         <module>lab2-service</module>
+        <module>gateway-service</module>
     </modules>
 </project>
