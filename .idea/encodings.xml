@@ -4,6 +4,8 @@
     <file url="file://$PROJECT_DIR$/Server18001/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/Server18002/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/Server18003/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/config-server/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/config-server1/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/gateway-service/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/good_service/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/lab2-service/src/main/java" charset="UTF-8" />

@@ -1,0 +1,42 @@
+server:
+  port: 8889
+
+spring:
+  application:
+    name: config-server
+  cloud:
+    config:
+      server:
+        git:
+          uri: https://gitee.com/shubai-xixi/springcloud-config-repo
+          username: 18177459597
+          password: hworld233
+          default-label: main
+    bus:
+      enabled: true
+    stream:
+      default:
+        group: ${spring.application.name}-${spring.cloud.client.ip-address}-${server.port}
+      rabbit:
+        bindings:
+          springCloudBusInput:
+            consumer:
+              queue-name-group-only: true
+              queue-declaration-retries: 2000
+              recovery-interval: 5000
+  rabbitmq:
+    host: localhost
+    port: 5672
+    username: guest
+    password: guest
+
+eureka:
+  client:
+    service-url:
+      defaultZone: http://eurekaServer18001:18001/eureka/,http://eurekaServer18002:18002/eureka/,http://eurekaServer18003:18003/eureka/
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: bus-refresh,health,info

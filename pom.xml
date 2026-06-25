@@ -86,5 +86,7 @@
         <module>payment_service</module>
         <module>lab2-service</module>
         <module>gateway-service</module>
+        <module>config-server</module>
+        <module>config-server1</module>
     </modules>
 </project>
