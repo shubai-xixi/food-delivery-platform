@@ -15,7 +15,7 @@
 
     <!-- 自己的坐标 -->
     <groupId>org.example</groupId>
-    <artifactId>elm-parent</artifactId>
+    <artifactId>food-delivery-platform</artifactId>
     <version>0.0.1-SNAPSHOT</version>
 
     <!-- 关键：必须是 pom -->
@@ -88,5 +88,11 @@
         <module>gateway-service</module>
         <module>config-server</module>
         <module>config-server1</module>
+        <module>elm_user_service</module>
+        <module>elm_goods_service</module>
+        <module>elm-common</module>
+        <module>elm_order_service</module>
+        <module>elm-gateway-service</module>
+
     </modules>
 </project>

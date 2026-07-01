@@ -1,0 +1,39 @@
+#server:
+#  port: 18999
+#
+#spring:
+#  application:
+#    name: elm-gateway-service
+#  cloud:
+#    gateway:
+#      discovery:
+#        locator:
+#          enabled: true
+#          lower-case-service-id: true
+#      routes:
+#        # user-service
+#        - id: user-service
+#          uri: lb://elm-user-service
+#          predicates:
+#            - Path=/user/**,/address/**
+#        # goods-service
+#        - id: goods-service
+#          uri: lb://elm-goods-service
+#          predicates:
+#            - Path=/categories/**,/merchants/**,/goods/**
+#        # order-service
+#        - id: order-service
+#          uri: lb://elm-order-service
+#          predicates:
+#            - Path=/orders/**,/cart/**
+#      globalcors:
+#        cors-configurations:
+#          '[/**]':
+#            allowedOrigins: "*"
+#            allowedMethods: "*"
+#            allowedHeaders: "*"
+#
+#eureka:
+#  client:
+#    service-url:
+#      defaultZone: http://eurekaServer18001:18001/eureka/,http://eurekaServer18002:18002/eureka/,http://eurekaServer18003:18003/eureka/

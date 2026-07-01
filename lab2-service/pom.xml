@@ -5,7 +5,7 @@
     <modelVersion>4.0.0</modelVersion>
     <parent>
         <groupId>org.example</groupId>
-        <artifactId>elm-parent</artifactId>
+        <artifactId>food-delivery-platform</artifactId>
         <version>0.0.1-SNAPSHOT</version>
     </parent>
 

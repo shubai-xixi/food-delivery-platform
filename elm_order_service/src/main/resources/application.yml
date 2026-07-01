@@ -1,0 +1,55 @@
+#server:
+#  port: 16020
+#
+#spring:
+#  application:
+#    name: elm-order-service
+#  datasource:
+#    url: jdbc:mysql://localhost:3306/order_service?useUnicode=true&characterEncoding=utf-8&serverTimezone=Asia/Shanghai
+#    username: root
+#    password: Mysqlsjk
+#    driver-class-name: com.mysql.cj.jdbc.Driver
+#
+#mybatis-plus:
+#  configuration:
+#    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+#
+#jwt:
+#  secret: elm-food-delivery-platform-jwt-secret-key-2024-must-be-long-enough-64bytes
+#  expiration: 604800000
+#
+#eureka:
+#  client:
+#    service-url:
+#      defaultZone: http://eurekaServer18001:18001/eureka/,http://eurekaServer18002:18002/eureka/,http://eurekaServer18003:18003/eureka/
+#
+#
+#resilience4j:
+#  ratelimiter:
+#    instances:
+#      createOrder:
+#        limit-for-period: 10       # 1秒10次
+#        limit-refresh-period: 1s
+#      payOrder:
+#        limit-for-period: 10
+#        limit-refresh-period: 1s
+#  bulkhead:
+#    instances:
+#      createOrder:
+#        max-concurrent-calls: 6    # 并发6个
+#        max-wait-duration: 0ms
+#      payOrder:
+#        max-concurrent-calls: 6
+#        max-wait-duration: 0ms
+#  circuitbreaker:
+#    instances:
+#      createOrder:
+#        failure-rate-threshold: 50
+#        sliding-window-size: 10
+#        minimum-number-of-calls: 5
+#        wait-duration-in-open-state: 10s
+#      payOrder:
+#        failure-rate-threshold: 50
+#        sliding-window-size: 10
+#        minimum-number-of-calls: 5
+#        wait-duration-in-open-state: 10s

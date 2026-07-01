@@ -1,0 +1,36 @@
+spring:
+  application:
+    name: elm-gateway-service
+  cloud:
+    config:
+      discovery:
+        enabled: true
+        service-id: config-server
+      label: main
+      profile: elm-gateway-service
+    stream:
+      default:
+        group: ${spring.application.name}-${spring.cloud.client.ip-address}-${server.port}
+      rabbit:
+        bindings:
+          springCloudBusInput:
+            consumer:
+              queue-name-group-only: true
+              queue-declaration-retries: 2000
+              recovery-interval: 5000
+  rabbitmq:
+    host: localhost
+    port: 5672
+    username: guest
+    password: guest
+
+eureka:
+  client:
+    service-url:
+      defaultZone: http://eurekaServer18001:18001/eureka/,http://eurekaServer18002:18002/eureka/,http://eurekaServer18003:18003/eureka/
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"

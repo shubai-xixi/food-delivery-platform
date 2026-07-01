@@ -6,6 +6,11 @@
     <file url="file://$PROJECT_DIR$/Server18003/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/config-server/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/config-server1/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/elm-common/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/elm-gateway-service/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/elm_goods_service/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/elm_order_service/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/elm_user_service/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/gateway-service/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/good_service/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/lab2-service/src/main/java" charset="UTF-8" />
